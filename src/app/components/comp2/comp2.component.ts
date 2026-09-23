@@ -20,9 +20,8 @@ import { Service1Service } from '../../components/services/service1.service';
   styleUrl: './comp2.component.css',
 })
 export class Comp2Component {
-  // Datos que recibe del padre
-  //@Input() dato1 = 0;
-  //@Input() dato2 = 0;
+  dato1 = 0;
+  dato2 = 0;
   constructor(public servicio: Service1Service) {}
   ngOnInit() {
     console.log('Dato 1 desde servicio:', this.servicio.dato1);
@@ -91,6 +90,6 @@ export class Comp2Component {
   }
 
   sumar() {
-    return this.servicio.dato1 + this.servicio.dato2;
+    return this.dato1 + this.dato2;
   }
 }

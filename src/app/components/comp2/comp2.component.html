@@ -1,8 +1,14 @@
 <h2>Componente 2</h2>
 
-<p>dato1: {{ servicio.dato1 }}</p>
+<label>Dato 1:</label>
+<input type="number" [(ngModel)]="dato1" />
 
-<p>dato2: {{ servicio.dato2 }}</p>
+<br /><br />
+
+<label>Dato 2:</label>
+<input type="number" [(ngModel)]="dato2" />
+
+<br /><br />
 
 <p>Resultado: {{ sumar() }}</p>
 
