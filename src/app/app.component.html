@@ -1,42 +1,11 @@
-<h1>Operaciones</h1>
+<h1>Componente padre</h1>
 
-<label for="estado">Filtrar por estado:</label>
+<button (click)="mostrarComp1 = !mostrarComp1">Componente 1</button>
 
-<select
-  id="estado"
-  [(ngModel)]="estadoSeleccionado"
-  (change)="filtrarOperaciones()"
->
-  <option value="TODOS">Todos</option>
-  <option value="LIQUIDADA">Liquidadas</option>
-  <option value="EN_TRAMITE">En trámite</option>
-  <option value="ANULADA">Anuladas</option>
-</select>
+@if (mostrarComp1) {
+  <app-comp1 (abrirComp2)="recibirDatos()"> </app-comp1>
+}
 
-<br /><br />
-
-<table border="4">
-  <table>
-    <tr>
-      <th>Número</th>
-      <th>Cliente</th>
-      <th>Estado</th>
-      <th>Fecha</th>
-      <th>Total</th>
-    </tr>
-
-    @for (op of operacionesFiltradas; track op.numero) {
-      <tr>
-        <td>{{ op.numero }}</td>
-        <td>{{ op.cliente }}</td>
-        <td>{{ op.estado }}</td>
-        <td>{{ op.fecha | date: "dd/MM/yyyy" }}</td>
-        <td>{{ op.total | number: "1.0-0" }}</td>
-      </tr>
-    } @empty {
-      <tr>
-        <td colspan="5">No hay operaciones para mostrar.</td>
-      </tr>
-    }
-  </table>
-</table>
+@if (mostrarComp2) {
+  <app-comp2></app-comp2>
+}

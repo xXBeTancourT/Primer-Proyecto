@@ -1,0 +1,15 @@
+button {
+  background-color: #f54927;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  font-family: sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  margin: 20px 0 0 50px;
+}
+
+h1 {
+  color: brown;
+  font-weight: bold;
+  margin: 10px 0 0 15px;
+}

@@ -1,0 +1,69 @@
+<h2>Componente 2</h2>
+
+<p>dato1: {{ servicio.dato1 }}</p>
+
+<p>dato2: {{ servicio.dato2 }}</p>
+
+<p>Resultado: {{ sumar() }}</p>
+
+<button (click)="muestraMenu = !muestraMenu">Componente 2</button>
+
+@if (muestraMenu) {
+  <h2>Operaciones</h2>
+
+  <label for="estado"> Filtrar por estado: </label>
+
+  <select
+    id="estado"
+    [(ngModel)]="estadoSeleccionado"
+    (change)="filtrarOperaciones()"
+  >
+    <option value="TODOS">Todos</option>
+
+    <option value="LIQUIDADA">Liquidadas</option>
+
+    <option value="EN_TRAMITE">En trámite</option>
+
+    <option value="ANULADA">Anuladas</option>
+  </select>
+
+  <br /><br />
+
+  <table border="8">
+    <tr>
+      <th>Número</th>
+      <th>Cliente</th>
+      <th>Estado</th>
+      <th>Fecha</th>
+      <th>Total</th>
+    </tr>
+
+    @for (op of operacionesFiltradas; track op.numero) {
+      <tr>
+        <td>
+          {{ op.numero }}
+        </td>
+
+        <td>
+          {{ op.cliente }}
+        </td>
+
+        <td>
+          {{ op.estado }}
+        </td>
+
+        <td>
+          {{ op.fecha | date: "dd/MM/yyyy" }}
+        </td>
+
+        <td>
+          {{ op.total | number: "1.0-0" }}
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="5">No hay operaciones para mostrar.</td>
+      </tr>
+    }
+  </table>
+}

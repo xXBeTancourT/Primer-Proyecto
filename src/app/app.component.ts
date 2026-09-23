@@ -2,71 +2,32 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Comp1Component } from './components/comp1/comp1.component';
+import { Comp2Component } from './components/comp2/comp2.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    FormsModule,
+    Comp1Component,
+    Comp2Component,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'operaciones-practica';
-  estadoSeleccionado = 'TODOS';
+  mostrarComp1 = false;
+  mostrarComp2 = false;
 
-  operaciones = [
-    {
-      numero: 'OP-2025-001',
-      cliente: 'Importadora Andina',
-      estado: 'LIQUIDADA',
-      fecha: '2025-01-20',
-      total: 6415000,
-    },
-    {
-      numero: 'OP-2025-002',
-      cliente: 'Importadora Andina',
-      estado: 'EN_TRAMITE',
-      fecha: '2025-02-11',
-      total: 3880000,
-    },
-    {
-      numero: 'OP-2025-006',
-      cliente: 'Comercializadora del Caribe',
-      estado: 'LIQUIDADA',
-      fecha: '2025-01-31',
-      total: 2420000,
-    },
-    {
-      numero: 'OP-2025-009',
-      cliente: 'Textiles Pacifico',
-      estado: 'LIQUIDADA',
-      fecha: '2025-02-18',
-      total: 5670000,
-    },
-    {
-      numero: 'OP-2025-010',
-      cliente: 'Textiles Pacifico',
-      estado: 'EN_TRAMITE',
-      fecha: '2025-05-06',
-      total: 1550000,
-    },
-    {
-      numero: 'OP-2025-016',
-      cliente: 'Quimicos del Norte',
-      estado: 'ANULADA',
-      fecha: '2025-06-30',
-      total: 250000,
-    },
-  ];
-  operacionesFiltradas = this.operaciones;
+  // Datos que nacen en el padre
+  a = 2;
+  b = 3;
 
-  filtrarOperaciones() {
-    if (this.estadoSeleccionado === 'TODOS') {
-      this.operacionesFiltradas = this.operaciones;
-    } else {
-      this.operacionesFiltradas = this.operaciones.filter(
-        (op) => op.estado === this.estadoSeleccionado,
-      );
-    }
+  // Recibe los datos que devuelve Comp1
+  recibirDatos() {
+    this.mostrarComp2 = !this.mostrarComp2;
   }
 }
