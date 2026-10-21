@@ -4,6 +4,7 @@
     --ft-panel-2: #0e3d86;
     --ft-ink: #0d2c5c;
     --ft-orange: #ff9500;
+    --ft-faro-circle: #0098ab;
     --ft-amber: #ffb300;
     --ft-paper: #f5f8fd;
     --ft-text: #eaf1fc;
@@ -111,7 +112,7 @@
     width: 84%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: var(--ft-orange);
+    background: var(--ft-faro-circle);
     transform: translate(-50%, -50%);
 }
 
