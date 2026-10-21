@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { AsoftyServiceService } from 'src/app/Services/asofty-service.service';
 import { DataService } from 'src/app/Services/data.service';
 import { dataUser } from 'src/app/model/dataUserModel';
@@ -91,8 +91,9 @@ const CONFETTI_COLORS = ['#ff9500', '#ffb300', '#5fd8ff', '#2fd27a', '#ff6b5a'];
   templateUrl: './admin-tutorials.component.html',
   styleUrls: ['./admin-tutorials.component.css']
 })
-export class AdminTutorialsComponent implements OnDestroy {
+export class AdminTutorialsComponent implements AfterViewInit, OnDestroy {
   @Output() closeTutorial = new EventEmitter
+  @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
 
   user: dataUser | undefined;
 
@@ -205,7 +206,13 @@ export class AdminTutorialsComponent implements OnDestroy {
     }, 700);
   }
 
+  // La capa se mueve al <body> para que los contenedores del padre no la recorten ni la desplacen
+  ngAfterViewInit() {
+    document.body.appendChild(this.overlay.nativeElement);
+  }
+
   ngOnDestroy() {
     clearInterval(this.typer);
+    this.overlay?.nativeElement.remove();
   }
 }

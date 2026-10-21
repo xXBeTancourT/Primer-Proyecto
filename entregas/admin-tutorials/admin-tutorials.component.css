@@ -1,4 +1,4 @@
-:host {
+.ft-overlay {
     --ft-sea: #0a4595;
     --ft-panel: #0b3474;
     --ft-panel-2: #0e3d86;
@@ -33,6 +33,10 @@
 
 * {
     box-sizing: border-box;
+}
+
+:host {
+    display: none;
 }
 
 /* ---------- modal ---------- */
@@ -352,7 +356,7 @@
 
 /* ---------- pantallas pequeñas ---------- */
 @media (max-width: 1100px) {
-    :host {
+    .ft-overlay {
         padding: 16px;
     }
 }
