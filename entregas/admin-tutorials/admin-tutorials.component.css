@@ -12,10 +12,23 @@
     --ft-ok: #2fd27a;
     --ft-font: 'Barlow', 'Segoe UI', Roboto, system-ui, sans-serif;
     --ft-cond: 'Barlow Condensed', 'Arial Narrow', 'Segoe UI', sans-serif;
+    /* medidas del encabezado y del menú lateral del ERP: la tarjeta se centra en el espacio restante */
+    --ft-header-height: 104px;
+    --ft-sidebar-width: 285px;
+    /* capa fija sobre toda la página que desenfoca lo que hay detrás */
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: 100%;
+    padding: calc(var(--ft-header-height) + 24px) 24px 24px calc(var(--ft-sidebar-width) + 24px);
+    overflow-y: auto;
+    background: rgba(4, 22, 52, .55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     font-family: var(--ft-font);
+    animation: ft-fade .3s ease-out both;
 }
 
 * {
@@ -326,6 +339,7 @@
 }
 
 /* ---------- animaciones ---------- */
+@keyframes ft-fade { from { opacity: 0; } }
 @keyframes ft-bob { 50% { transform: translateY(-6px); } }
 @keyframes ft-glow { 50% { opacity: .45; transform: scale(1.25); } }
 @keyframes ft-wave { 0%, 100% { transform: rotate(-150deg); } 50% { transform: rotate(-126deg); } }
@@ -337,6 +351,12 @@
 @keyframes ft-caret { 50% { opacity: 0; } }
 
 /* ---------- pantallas pequeñas ---------- */
+@media (max-width: 1100px) {
+    :host {
+        padding: 16px;
+    }
+}
+
 @media (max-width: 820px) {
     .ft-modal {
         grid-template-columns: 1fr;
