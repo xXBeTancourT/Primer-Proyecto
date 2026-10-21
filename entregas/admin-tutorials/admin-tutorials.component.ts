@@ -121,6 +121,7 @@ export class AdminTutorialsComponent implements AfterViewInit, OnDestroy {
   index = 0;
   sayText = '';
   typing = false;
+  closing = false;
   private typer: any;
   private readonly reducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
@@ -192,6 +193,8 @@ export class AdminTutorialsComponent implements AfterViewInit, OnDestroy {
   }
 
   firstlogging() {
+    if (this.closing) return;
+    this.closing = true;
     if (this.user) {
       let loginDto = {
         CompanyCode: this.user.companyCode,
@@ -201,7 +204,10 @@ export class AdminTutorialsComponent implements AfterViewInit, OnDestroy {
       this.service.connectApiPost("Auth/UpdateUserField?field=FirstLogin&value=0", loginDto, (res: any) => {
       })
     }
+    // Se cierra solo, aunque el padre no lo quite con *ngIf
     setTimeout(() => {
+      clearInterval(this.typer);
+      this.overlay?.nativeElement.remove();
       this.closeTutorial.emit()
     }, 700);
   }

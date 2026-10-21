@@ -39,6 +39,11 @@
     display: none;
 }
 
+.ft-overlay.ft-closing {
+    pointer-events: none;
+    animation: ft-fade-out .6s ease-in forwards;
+}
+
 /* ---------- modal ---------- */
 .ft-modal {
     position: relative;
@@ -344,6 +349,7 @@
 
 /* ---------- animaciones ---------- */
 @keyframes ft-fade { from { opacity: 0; } }
+@keyframes ft-fade-out { to { opacity: 0; } }
 @keyframes ft-bob { 50% { transform: translateY(-6px); } }
 @keyframes ft-glow { 50% { opacity: .45; transform: scale(1.25); } }
 @keyframes ft-wave { 0%, 100% { transform: rotate(-150deg); } 50% { transform: rotate(-126deg); } }

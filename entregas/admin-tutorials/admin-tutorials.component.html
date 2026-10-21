@@ -1,4 +1,4 @@
-<div class="ft-overlay" #overlay>
+<div class="ft-overlay" #overlay [class.ft-closing]="closing">
     <div class="ft-modal" role="dialog" aria-label="Bienvenida a FORWARTY ERP Cloud">
         <!-- Faro y su globo de texto -->
         <div class="ft-left">
@@ -209,7 +209,7 @@
                 <span *ngIf="isLast"></span>
                 <div class="ft-actions">
                     <button type="button" class="ft-btn ft-btn-sec" [disabled]="isFirst" (click)="back()">Atrás</button>
-                    <button type="button" class="ft-btn" (click)="next()">
+                    <button type="button" class="ft-btn" [disabled]="closing" (click)="next()">
                         {{ isFirst ? '¡Comencemos!' : isLast ? 'Empezar a usar FORWARTY' : 'Siguiente' }}
                     </button>
                 </div>
