@@ -1,0 +1,222 @@
+<div class="ft-modal" role="dialog" aria-label="Bienvenida a FORWARTY ERP Cloud">
+    <!-- Faro y su globo de texto -->
+    <div class="ft-left">
+        <div class="ft-bubble" aria-live="polite"><span [class.ft-caret]="typing">{{ sayText }}</span></div>
+        <div class="ft-faro-stage">
+            <svg class="ft-faro" viewBox="0 -14 260 266" role="img" aria-label="Faro, el robot guía">
+                <defs>
+                    <radialGradient id="ftGlow"><stop offset="0" stop-color="#ffe2a0" /><stop offset="1" stop-color="#ff9500" stop-opacity="0" /></radialGradient>
+                    <linearGradient id="ftBeam" x1="0" x2="1"><stop offset="0" stop-color="#ffe7b0" stop-opacity=".8" /><stop offset="1" stop-color="#ffe7b0" stop-opacity="0" /></linearGradient>
+                    <linearGradient id="ftMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#dbe5f3" /></linearGradient>
+                </defs>
+                <ellipse cx="130" cy="240" rx="54" ry="7" fill="#021a40" opacity=".35" />
+                <g transform="translate(30 0)">
+                    <g class="ft-bob">
+                        <!-- luz del faro -->
+                        <g class="ft-beam" [class.ft-on]="pose.beam">
+                            <polygon points="100,10 236,-14 236,40" fill="url(#ftBeam)" />
+                            <polygon points="100,10 236,-14 236,40" fill="url(#ftBeam)" transform="translate(200 0) scale(-1 1)" />
+                        </g>
+                        <!-- piernas y cuerpo -->
+                        <rect x="74" y="184" width="20" height="30" rx="8" fill="#c9d5e6" />
+                        <rect x="106" y="184" width="20" height="30" rx="8" fill="#c9d5e6" />
+                        <rect x="66" y="208" width="32" height="14" rx="7" fill="#0d2c5c" />
+                        <rect x="102" y="208" width="32" height="14" rx="7" fill="#0d2c5c" />
+                        <rect x="62" y="110" width="76" height="80" rx="24" fill="url(#ftMetal)" stroke="#cdd9ea" stroke-width="2" />
+                        <rect x="62" y="168" width="76" height="8" fill="#0a4595" opacity=".9" />
+                        <circle cx="100" cy="140" r="15" fill="#fff" stroke="#0a4595" stroke-width="5" />
+                        <circle cx="100" cy="140" r="6" fill="#ff9500" />
+                        <path d="M100 137.5 h14 v-4 l7 6.5 -7 6.5 v-4 h-14z" fill="#ff9500" />
+                        <rect x="88" y="102" width="24" height="10" rx="3" fill="#c9d5e6" />
+                        <!-- lámpara -->
+                        <circle class="ft-glow" cx="100" cy="10" r="22" fill="url(#ftGlow)" />
+                        <rect x="95" y="16" width="10" height="16" fill="#c9d5e6" />
+                        <rect x="86" y="2" width="28" height="16" rx="7" fill="#ffb300" stroke="#ff9500" stroke-width="2" />
+                        <path d="M88 3 Q100 -9 112 3Z" fill="#0d2c5c" />
+                        <!-- cabeza -->
+                        <rect x="46" y="30" width="108" height="76" rx="28" fill="url(#ftMetal)" stroke="#cdd9ea" stroke-width="2" />
+                        <circle cx="45" cy="68" r="8" fill="#ff9500" />
+                        <circle cx="155" cy="68" r="8" fill="#ff9500" />
+                        <rect x="59" y="45" width="82" height="46" rx="19" fill="#0d2c5c" />
+                        <!-- cara -->
+                        <ng-container [ngSwitch]="pose.face">
+                            <g *ngSwitchCase="'happy'">
+                                <path d="M74 69 Q82 59 90 69 M110 69 Q118 59 126 69" stroke="#5fd8ff" stroke-width="4.5" fill="none" stroke-linecap="round" />
+                                <path d="M89 77 Q100 89 111 77" stroke="#5fd8ff" stroke-width="3.5" fill="none" stroke-linecap="round" />
+                            </g>
+                            <g *ngSwitchCase="'wink'">
+                                <g class="ft-eyes"><circle cx="82" cy="66" r="7" fill="#5fd8ff" /><circle cx="84.4" cy="63.4" r="2.2" fill="#fff" /></g>
+                                <path d="M110 69 Q118 59 126 69" stroke="#5fd8ff" stroke-width="4.5" fill="none" stroke-linecap="round" />
+                                <path d="M91 78 Q100 87 109 78" stroke="#5fd8ff" stroke-width="3.5" fill="none" stroke-linecap="round" />
+                            </g>
+                            <g *ngSwitchCase="'alert'">
+                                <g class="ft-eyes">
+                                    <circle cx="82" cy="66" r="9" fill="#5fd8ff" /><circle cx="84.4" cy="63.4" r="2.9" fill="#fff" />
+                                    <circle cx="118" cy="66" r="9" fill="#5fd8ff" /><circle cx="120.4" cy="63.4" r="2.9" fill="#fff" />
+                                </g>
+                                <circle cx="100" cy="82" r="3.5" stroke="#5fd8ff" stroke-width="3" fill="none" />
+                            </g>
+                            <g *ngSwitchDefault>
+                                <g class="ft-eyes">
+                                    <circle cx="82" cy="66" r="7" fill="#5fd8ff" /><circle cx="84.4" cy="63.4" r="2.2" fill="#fff" />
+                                    <circle cx="118" cy="66" r="7" fill="#5fd8ff" /><circle cx="120.4" cy="63.4" r="2.2" fill="#fff" />
+                                </g>
+                                <path d="M93 80 Q100 85 107 80" stroke="#5fd8ff" stroke-width="3.5" fill="none" stroke-linecap="round" />
+                            </g>
+                        </ng-container>
+                        <!-- brazos -->
+                        <g transform="translate(62 124)">
+                            <g class="ft-arm" [style.transform]="'rotate(' + pose.l + 'deg)'">
+                                <rect x="-8" y="-4" width="16" height="44" rx="8" fill="#dbe5f3" stroke="#cdd9ea" stroke-width="2" />
+                                <circle cx="0" cy="44" r="9.5" fill="#ff9500" />
+                            </g>
+                        </g>
+                        <g transform="translate(138 124)">
+                            <g class="ft-arm" [class.ft-waving]="pose.wave" [style.transform]="'rotate(' + pose.r + 'deg)'">
+                                <rect x="-8" y="-4" width="16" height="44" rx="8" fill="#dbe5f3" stroke="#cdd9ea" stroke-width="2" />
+                                <circle cx="0" cy="44" r="9.5" fill="#ff9500" />
+                            </g>
+                        </g>
+                        <!-- objetos de cada paso -->
+                        <ng-container [ngSwitch]="pose.prop">
+                            <g *ngSwitchCase="'calendar'" class="ft-prop">
+                                <rect x="2" y="120" width="50" height="46" rx="7" fill="#fff" stroke="#cdd9ea" stroke-width="2" />
+                                <path d="M2 127 a7 7 0 0 1 7 -7 h36 a7 7 0 0 1 7 7 v7 h-50z" fill="#ff9500" />
+                                <rect x="12" y="114" width="4" height="10" rx="2" fill="#0d2c5c" />
+                                <rect x="38" y="114" width="4" height="10" rx="2" fill="#0d2c5c" />
+                                <rect x="9" y="139" width="10" height="6" rx="1.5" fill="#2fd27a" />
+                                <rect x="22" y="139" width="10" height="6" rx="1.5" fill="#2fd27a" />
+                                <rect x="35" y="139" width="10" height="6" rx="1.5" fill="#2fd27a" />
+                                <rect x="9" y="147.5" width="10" height="6" rx="1.5" fill="#2fd27a" />
+                                <rect x="22" y="147.5" width="10" height="6" rx="1.5" fill="#dbe4f1" />
+                                <rect x="35" y="147.5" width="10" height="6" rx="1.5" fill="#dbe4f1" />
+                                <rect x="9" y="156" width="10" height="6" rx="1.5" fill="#dbe4f1" />
+                                <rect x="22" y="156" width="10" height="6" rx="1.5" fill="#dbe4f1" />
+                                <rect x="35" y="156" width="10" height="6" rx="1.5" fill="#dbe4f1" />
+                            </g>
+                            <g *ngSwitchCase="'team'" class="ft-prop">
+                                <g transform="translate(196 196) scale(.85)">
+                                    <line x1="0" y1="-30" x2="0" y2="-18" stroke="#cdd9ea" stroke-width="4" /><circle cx="0" cy="-31" r="5" fill="#ffb300" />
+                                    <rect x="-22" y="-18" width="44" height="32" rx="12" fill="#f5f8fd" /><rect x="-15" y="-11" width="30" height="17" rx="8" fill="#0d2c5c" />
+                                    <path d="M-10 -2 q4 -5 8 0 M2 -2 q4 -5 8 0" stroke="#5fd8ff" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                                    <rect x="-15" y="16" width="30" height="26" rx="9" fill="#f5f8fd" /><circle cx="0" cy="28" r="5" fill="#ffb300" />
+                                </g>
+                                <g transform="translate(226 206) scale(.7)">
+                                    <line x1="0" y1="-30" x2="0" y2="-18" stroke="#cdd9ea" stroke-width="4" /><circle cx="0" cy="-31" r="5" fill="#2fd27a" />
+                                    <rect x="-22" y="-18" width="44" height="32" rx="12" fill="#f5f8fd" /><rect x="-15" y="-11" width="30" height="17" rx="8" fill="#0d2c5c" />
+                                    <path d="M-10 -2 q4 -5 8 0 M2 -2 q4 -5 8 0" stroke="#5fd8ff" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                                    <rect x="-15" y="16" width="30" height="26" rx="9" fill="#f5f8fd" /><circle cx="0" cy="28" r="5" fill="#2fd27a" />
+                                </g>
+                            </g>
+                            <g *ngSwitchCase="'flag'" class="ft-prop">
+                                <line x1="154" y1="94" x2="154" y2="2" stroke="#dbe4f1" stroke-width="4" stroke-linecap="round" />
+                                <path d="M156 4 L204 17 L156 32Z" fill="#ff9500" />
+                                <path d="M172 12 l2.5 5 5.5 .8 -4 3.8 1 5.4 -5 -2.6 -5 2.6 1 -5.4 -4 -3.8 5.5 -.8z" fill="#fff" />
+                            </g>
+                            <g *ngSwitchCase="'chart'" class="ft-prop">
+                                <rect x="182" y="28" width="48" height="66" rx="7" fill="#fff" stroke="#cdd9ea" stroke-width="2" />
+                                <circle cx="198" cy="44" r="7" fill="none" stroke="#5fd8ff" stroke-width="4" />
+                                <path d="M198 37 a7 7 0 0 1 7 7" stroke="#ff9500" stroke-width="4" fill="none" />
+                                <rect x="189" y="72" width="8" height="15" rx="1.5" fill="#ff9500" />
+                                <rect x="201" y="62" width="8" height="25" rx="1.5" fill="#0a4595" />
+                                <rect x="213" y="54" width="8" height="33" rx="1.5" fill="#ffb300" />
+                            </g>
+                            <g *ngSwitchCase="'headset'" class="ft-prop">
+                                <path d="M42 74 Q42 22 100 22 Q158 22 158 74" stroke="#0d2c5c" stroke-width="7" fill="none" />
+                                <rect x="34" y="58" width="16" height="28" rx="7" fill="#ff9500" />
+                                <rect x="150" y="58" width="16" height="28" rx="7" fill="#ff9500" />
+                                <path d="M158 84 Q158 100 128 100" stroke="#0d2c5c" stroke-width="4" fill="none" />
+                                <circle cx="125" cy="100" r="5" fill="#0d2c5c" />
+                            </g>
+                            <g *ngSwitchCase="'shield'" class="ft-prop">
+                                <path d="M22 112 L48 121 L46 148 Q42 166 22 176 Q2 166 -2 148 L-4 121Z" fill="#2fa8ff" stroke="#fff" stroke-width="3" />
+                                <path d="M15 140 v-6 a7 7 0 0 1 14 0 v6" stroke="#fff" stroke-width="3.5" fill="none" />
+                                <rect x="11" y="139" width="22" height="18" rx="3" fill="#fff" />
+                                <circle cx="22" cy="147" r="2.6" fill="#0d2c5c" />
+                            </g>
+                            <g *ngSwitchCase="'laptop'" class="ft-prop">
+                                <rect x="146" y="104" width="64" height="44" rx="5" fill="#0d2c5c" stroke="#fff" stroke-width="2" />
+                                <rect x="151" y="109" width="54" height="34" rx="2" fill="#1b5fc0" />
+                                <path d="M178 113 l10 3.5 v8 q0 8 -10 12 q-10 -4 -10 -12 v-8z" fill="#2fd27a" />
+                                <path d="M173 125 l3.5 3.5 l6 -7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M138 150 h80 l-6 8 h-68z" fill="#cfd8e6" stroke="#fff" stroke-width="2" stroke-linejoin="round" />
+                                <rect x="170" y="150" width="16" height="3" rx="1.5" fill="#9fb0c8" />
+                            </g>
+                            <g *ngSwitchCase="'gear'" class="ft-prop">
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(0 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(45 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(90 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(135 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(180 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(225 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(270 100 176)" />
+                                <rect x="95" y="150" width="10" height="12" rx="2" fill="#b9c6d9" transform="rotate(315 100 176)" />
+                                <circle cx="100" cy="176" r="19" fill="#cfd8e6" stroke="#9fb0c8" stroke-width="2" />
+                                <circle cx="100" cy="176" r="7.2" fill="#0d2c5c" />
+                            </g>
+                            <g *ngSwitchCase="'save'" class="ft-prop">
+                                <rect x="162" y="96" width="42" height="42" rx="6" fill="#1b5fc0" stroke="#fff" stroke-width="2" />
+                                <rect x="170" y="96" width="24" height="13" fill="#cfe0ff" />
+                                <rect x="187" y="99" width="4" height="7" fill="#1b5fc0" />
+                                <rect x="169" y="117" width="28" height="17" rx="2" fill="#fff" />
+                                <path d="M175 125 h16 M175 129 h10" stroke="#9fb3d1" stroke-width="2" />
+                            </g>
+                            <g *ngSwitchCase="'party'" class="ft-prop">
+                                <g class="ft-confetti-svg">
+                                    <rect x="-14" y="0" width="6" height="10" rx="1.5" fill="#ff9500" />
+                                    <rect x="23" y="53" width="6" height="10" rx="1.5" fill="#ffb300" transform="rotate(31 26 58)" />
+                                    <rect x="60" y="106" width="6" height="10" rx="1.5" fill="#5fd8ff" transform="rotate(62 63 111)" />
+                                    <rect x="170" y="40" width="6" height="10" rx="1.5" fill="#2fd27a" transform="rotate(93 173 45)" />
+                                    <rect x="207" y="93" width="6" height="10" rx="1.5" fill="#ff6b5a" transform="rotate(124 210 98)" />
+                                    <rect x="35" y="27" width="6" height="10" rx="1.5" fill="#2fd27a" transform="rotate(155 38 32)" />
+                                    <rect x="185" y="0" width="6" height="10" rx="1.5" fill="#5fd8ff" transform="rotate(186 188 5)" />
+                                    <rect x="150" y="120" width="6" height="10" rx="1.5" fill="#ffb300" transform="rotate(217 153 125)" />
+                                </g>
+                                <g transform="rotate(-18 100 30)">
+                                    <path d="M74 34 L100 -10 L118 34Z" fill="#ffb300" stroke="#fff" stroke-width="2" />
+                                    <circle cx="91" cy="-9" r="5" fill="#ff6b5a" />
+                                </g>
+                            </g>
+                        </ng-container>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- contenido del paso -->
+    <div class="ft-right">
+        <div class="ft-progress">
+            <span>{{ progressLabel }}</span>
+            <div class="ft-track"><div class="ft-fill" [style.width.%]="progress"></div></div>
+        </div>
+        <div class="ft-title">
+            <div class="ft-num" *ngIf="isRecommendation">{{ index }}</div>
+            <h3>{{ step.title }}</h3>
+        </div>
+        <p class="ft-body">{{ step.text }}</p>
+
+        <div class="ft-summary" *ngIf="isLast">
+            <span class="ft-label">Lo que ya sabes</span>
+            <ul>
+                <li *ngFor="let r of recommendations">{{ r.short }}</li>
+            </ul>
+        </div>
+
+        <div class="ft-foot">
+            <button type="button" class="ft-skip" *ngIf="!isLast" (click)="skip()">Saltar recorrido</button>
+            <span *ngIf="isLast"></span>
+            <div class="ft-actions">
+                <button type="button" class="ft-btn ft-btn-sec" [disabled]="isFirst" (click)="back()">Atrás</button>
+                <button type="button" class="ft-btn" (click)="next()">
+                    {{ isFirst ? '¡Comencemos!' : isLast ? 'Empezar a usar FORWARTY' : 'Siguiente' }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ft-confetti" *ngIf="isLast" aria-hidden="true">
+        <i *ngFor="let c of confetti" [style.left.%]="c.x" [style.background]="c.color"
+            [style.animation-duration.s]="c.duration" [style.animation-delay.s]="c.delay"></i>
+    </div>
+</div>
